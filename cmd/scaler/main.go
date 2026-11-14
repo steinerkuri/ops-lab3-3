@@ -72,9 +72,11 @@ type options struct {
 	Prom       string  `json:"prom"`
 	Admin      string  `json:"admin"`
 	Started    string  `json:"started"`
+	NodeSize   int     `json:"node_size"`
+	NodeWait   string  `json:"node_wait"`
 
-	sync, downWindow, pull time.Duration
-	schedule               []schedEntry
+	sync, downWindow, pull, nodeWait time.Duration
+	schedule                         []schedEntry
 }
 
 type schedEntry struct {
@@ -115,6 +117,13 @@ type scaler struct {
 	decLog   *csvLog
 	instLog  *csvLog
 	http     *http.Client
+
+	// 选做 O2 的两层伸缩：实例只能落在节点上，节点加不出来时空位就是硬的。
+	nodeSlots int       // 已有的节点一共能放几个实例
+	nodeCount int       // 已有的节点数
+	nodeUntil time.Time // 正在申请的节点何时到位；零值表示没有在申请
+	pending   int       // 等节点期间积攒的欠账：当时想要几个实例
+	nodeLog   *csvLog   // 节点事件（unix_ms,time,t_run,event,detail）
 }
 
 type histEntry struct {
@@ -149,8 +158,11 @@ func main() {
 	flag.StringVar(&o.LB, "lb", "http://127.0.0.1:8090", "lbd 的管理接口")
 	flag.StringVar(&o.Prom, "prom", "http://127.0.0.1:9090", "Prometheus 的地址")
 	flag.StringVar(&o.Admin, "admin", "127.0.0.1:8091", "scaler 自己的管理接口")
+	flag.IntVar(&o.NodeSize, "node-size", 0, "选做 O2：每个节点能放几个实例；0 表示不模拟节点层（默认）")
+	flag.DurationVar(&o.nodeWait, "node-wait", 0, "选做 O2：加一个节点要等多久（节点扩容与调度的时间）")
 	flag.Parse()
 	o.Sync, o.DownWindow, o.Pull = o.sync.String(), o.downWindow.String(), o.pull.String()
+	o.NodeWait = o.nodeWait.String()
 	o.Started = time.Now().Format(time.RFC3339)
 	if err := o.check(); err != nil {
 		log.Fatal(err)
@@ -198,6 +210,12 @@ func (o *options) check() error {
 	}
 	if o.Quota < 1 {
 		return errors.New("-quota 至少为 1（%）")
+	}
+	if o.NodeSize < 0 {
+		return errors.New("-node-size 不能是负数")
+	}
+	if o.NodeSize > 0 && o.nodeWait <= 0 {
+		return errors.New("开了 -node-size 就要给 -node-wait，例如 4m")
 	}
 	sched, err := parseSchedule(o.Schedule)
 	if err != nil {
@@ -297,14 +315,62 @@ func newScaler(o options) (*scaler, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &scaler{opt: o, decLog: dl, instLog: il, http: &http.Client{Timeout: 3 * time.Second}}, nil
+	s := &scaler{opt: o, decLog: dl, instLog: il, http: &http.Client{Timeout: 3 * time.Second}}
+	if o.NodeSize > 0 {
+		// 选做 O2：一开始就有一个节点，节点里有 -node-size 个空位；空位用完才去加节点。
+		s.nodeSlots, s.nodeCount = o.NodeSize, 1
+		nl, err := openCSV(filepath.Join(o.Data, "nodes.csv"), []string{"unix_ms", "time", "t_run", "event", "detail"})
+		if err != nil {
+			return nil, err
+		}
+		s.nodeLog = nl
+	}
+	return s, nil
+}
+
+// reserveSlot 是选做 O2：要新建实例时先看节点里还有没有空位。
+// 空位不够就发起一次节点扩容（等 -node-wait），并返回 false——这一次不建实例。
+// 调用者持有锁。
+func (s *scaler) reserveSlot() bool {
+	if s.opt.NodeSize <= 0 {
+		return true
+	}
+	if s.activeCount() < s.nodeSlots {
+		return true
+	}
+	if s.nodeUntil.IsZero() {
+		s.nodeUntil = time.Now().Add(s.opt.nodeWait)
+		s.nodeLog.write(strconv.FormatInt(time.Now().UnixMilli(), 10), time.Now().Format("15:04:05.000"), s.tRun(time.Now()),
+			"request", fmt.Sprintf("空位用完（%d 个节点 × %d），申请新节点，%v 后到位", s.nodeCount, s.opt.NodeSize, s.opt.nodeWait))
+		log.Printf("节点层：空位用完，申请第 %d 个节点，%v 后到位", s.nodeCount+1, s.opt.nodeWait)
+	}
+	return false
+}
+
+// tickNode 每秒调用：申请的节点到位后把空位加上，并返回 true。
+// 调用者持有锁。
+func (s *scaler) tickNode() bool {
+	if s.opt.NodeSize <= 0 || s.nodeUntil.IsZero() || time.Now().Before(s.nodeUntil) {
+		return false
+	}
+	s.nodeCount++
+	s.nodeSlots += s.opt.NodeSize
+	s.nodeLog.write(strconv.FormatInt(time.Now().UnixMilli(), 10), time.Now().Format("15:04:05.000"), s.tRun(time.Now()),
+		"ready", fmt.Sprintf("第 %d 个节点到位，空位共 %d 个", s.nodeCount, s.nodeSlots))
+	log.Printf("节点层：第 %d 个节点到位，空位共 %d 个", s.nodeCount, s.nodeSlots)
+	s.nodeUntil = time.Time{}
+	return true
 }
 
 func (s *scaler) describe() string {
 	if s.opt.Mode == "fixed" {
 		return fmt.Sprintf("固定 %d 个实例", s.opt.Replicas)
 	}
-	return fmt.Sprintf("按信号伸缩，目标 %g，%d～%d 个，定时表 %q", s.opt.Target, s.opt.Min, s.opt.Max, s.opt.Schedule)
+	d := fmt.Sprintf("按信号伸缩，目标 %g，%d～%d 个，定时表 %q", s.opt.Target, s.opt.Min, s.opt.Max, s.opt.Schedule)
+	if s.opt.NodeSize > 0 {
+		d += fmt.Sprintf("；节点层：每节点 %d 个空位，加节点等 %v", s.opt.NodeSize, s.opt.nodeWait)
+	}
+	return d
 }
 
 func (s *scaler) tRun(now time.Time) string {
@@ -341,6 +407,13 @@ func (s *scaler) run(ctx context.Context) {
 	nextDecision := time.Now()
 	for {
 		s.readRunStart()
+		s.mu.Lock()
+		arrived := s.tickNode()
+		s.mu.Unlock()
+		if arrived {
+			// 节点到位就立刻做一次决策，不等下一个 -sync：否则空位白白再等一个决策周期。
+			nextDecision = time.Now()
+		}
 		s.reconcile()
 		if s.opt.Mode == "reactive" && !time.Now().Before(nextDecision) {
 			s.decide()
@@ -411,6 +484,9 @@ func (s *scaler) reconcile() {
 	}
 	if s.opt.Mode == "fixed" && !s.busy {
 		for n := s.activeCount(); n < s.opt.Replicas; n++ {
+			if !s.reserveSlot() {
+				break
+			}
 			s.create(s.opt.Version, false, "补足到 "+strconv.Itoa(s.opt.Replicas)+" 个")
 		}
 	}
@@ -464,15 +540,39 @@ func (s *scaler) decide() {
 	lo := minAt(s.opt.Min, s.opt.schedule, now.Sub(s.runStart), running)
 	hi := max(s.opt.Max, lo)
 	computed := desiredReplicas(current, sig, s.opt.Target, s.opt.Tolerance, lo, hi)
+	// 选做 O2：等节点期间记下的欠账。节点到位后按欠账补足，而不是按“当前数 × 信号”一格一格爬。
+	if s.pending > 0 && s.nodeUntil.IsZero() {
+		if current >= s.pending {
+			s.pending = 0
+		} else {
+			computed = max(computed, s.pending)
+		}
+	}
 	desired := stabilized(current, computed, s.hist, now, s.opt.downWindow)
 	s.hist = append(s.hist, histEntry{now, computed})
 	s.hist = slices.DeleteFunc(s.hist, func(h histEntry) bool { return now.Sub(h.t) > s.opt.downWindow })
 	action := "none"
 	switch {
 	case desired > current:
-		action = fmt.Sprintf("create %d", desired-current)
-		for i := current; i < desired; i++ {
+		want := desired - current
+		made := 0
+		note := ""
+		for i := 0; i < want; i++ {
+			if !s.reserveSlot() {
+				note = "；空位不够，等节点到 " + s.nodeUntil.Format("15:04:05")
+				s.pending = max(s.pending, desired)
+				break
+			}
 			s.create(s.opt.Version, false, "扩容")
+			made++
+		}
+		switch {
+		case made == want:
+			action = fmt.Sprintf("create %d", made)
+		case made > 0:
+			action = fmt.Sprintf("create %d%s", made, note)
+		default:
+			action = "none" + note
 		}
 	case desired < current:
 		action = fmt.Sprintf("remove %d", current-desired)
