@@ -1,0 +1,49 @@
+# HELP lb_requests_total lbd 转发完的请求数，按实例和状态码分；502 表示转发失败，503 表示没有可用的实例
+# TYPE lb_requests_total counter
+lb_requests_total{backend="127.0.0.1:8101",code="200"} 37229
+lb_requests_total{backend="127.0.0.1:8101",code="502"} 12710
+lb_requests_total{backend="none",code="503"} 10258
+# HELP lb_request_duration_seconds lbd 看到的耗时：从收到请求到转发的响应写完
+# TYPE lb_request_duration_seconds histogram
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="0.001"} 683
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="0.002"} 10764
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="0.005"} 19038
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="0.01"} 22907
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="0.02"} 24617
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="0.05"} 25000
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="0.1"} 25209
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="0.2"} 25696
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="0.5"} 27761
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="1"} 31515
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="2"} 41325
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="5"} 49939
+lb_request_duration_seconds_bucket{backend="127.0.0.1:8101",le="+Inf"} 49939
+lb_request_duration_seconds_sum{backend="127.0.0.1:8101"} 36722.81909798387
+lb_request_duration_seconds_count{backend="127.0.0.1:8101"} 49939
+# HELP lb_inflight_requests 正在转发给该实例的请求数
+# TYPE lb_inflight_requests gauge
+lb_inflight_requests{backend="127.0.0.1:8101"} 0
+# HELP lb_backend_up 健康检查的结论：1 健康，0 不健康
+# TYPE lb_backend_up gauge
+lb_backend_up{backend="127.0.0.1:8101"} 0
+lb_backend_up{backend="127.0.0.1:8102"} 0
+lb_backend_up{backend="127.0.0.1:8103"} 0
+# HELP lb_backend_eligible 能否接新请求：健康、没有排空、没有被摘除时为 1
+# TYPE lb_backend_eligible gauge
+lb_backend_eligible{backend="127.0.0.1:8101"} 0
+lb_backend_eligible{backend="127.0.0.1:8102"} 0
+lb_backend_eligible{backend="127.0.0.1:8103"} 0
+# HELP lb_no_backend_total 没有可用实例、直接返回 503 的请求数
+# TYPE lb_no_backend_total counter
+lb_no_backend_total 10258
+# HELP lb_events_total 状态变化的次数，按事件分
+# TYPE lb_events_total counter
+lb_events_total{event="added"} 4
+lb_events_total{event="removed"} 4
+lb_events_total{event="up"} 1
+# HELP lb_backends 当前登记的实例数（含不健康、排空中的）
+# TYPE lb_backends gauge
+lb_backends 0
+# HELP lb_backends_eligible 当前能接新请求的实例数
+# TYPE lb_backends_eligible gauge
+lb_backends_eligible 0
