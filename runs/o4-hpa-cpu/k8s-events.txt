@@ -1,0 +1,44 @@
+LAST SEEN   TYPE      REASON              OBJECT                            MESSAGE
+4m55s       Warning   Unhealthy           pod/enrolld-6fbbdd58-mz4mw        Readiness probe failed: HTTP probe failed with statuscode: 503
+56m         Normal    Created             pod/enrolld-6fbbdd58-mz4mw        Container created
+56m         Normal    SuccessfulCreate    replicaset/enrolld-6fbbdd58       Created pod: enrolld-6fbbdd58-mz4mw
+56m         Normal    SuccessfulCreate    replicaset/enrolld-6fbbdd58       Created pod: enrolld-6fbbdd58-xdwrh
+56m         Normal    Pulled              pod/enrolld-6fbbdd58-xdwrh        Container image "docker.io/library/lab3-enrolld:manual-v1" already present on machine and can be accessed by the pod
+56m         Warning   Unhealthy           pod/enrolld-6fbbdd58-xdwrh        Readiness probe failed: HTTP probe failed with statuscode: 503
+56m         Warning   Unhealthy           pod/enrolld-6fbbdd58-xdwrh        Readiness probe failed: Get "http://10.42.0.71:8081/readyz": dial tcp 10.42.0.71:8081: connect: connection refused
+56m         Normal    Scheduled           pod/enrolld-6fbbdd58-mz4mw        Successfully assigned lab3-o4/enrolld-6fbbdd58-mz4mw to ecs-course-01
+56m         Normal    ScalingReplicaSet   deployment/enrolld                Scaled up replica set enrolld-6fbbdd58 from 0 to 2
+56m         Normal    Started             pod/enrolld-6fbbdd58-mz4mw        Container started
+56m         Normal    Pulled              pod/enrolld-6fbbdd58-mz4mw        Container image "docker.io/library/lab3-enrolld:manual-v1" already present on machine and can be accessed by the pod
+56m         Warning   Unhealthy           pod/enrolld-6fbbdd58-mz4mw        Readiness probe failed: Get "http://10.42.0.72:8081/readyz": dial tcp 10.42.0.72:8081: connect: connection refused
+56m         Normal    Scheduled           pod/enrolld-6fbbdd58-xdwrh        Successfully assigned lab3-o4/enrolld-6fbbdd58-xdwrh to ecs-course-01
+56m         Normal    Created             pod/enrolld-6fbbdd58-xdwrh        Container created
+56m         Normal    Started             pod/enrolld-6fbbdd58-xdwrh        Container started
+11m         Warning   Unhealthy           pod/enrolld-6fbbdd58-mz4mw        Readiness probe failed: Get "http://10.42.0.72:8081/readyz": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+11m         Warning   Unhealthy           pod/enrolld-6fbbdd58-xdwrh        Readiness probe failed: Get "http://10.42.0.71:8081/readyz": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+15m         Normal    SuccessfulCreate    replicaset/enrolld-6fbbdd58       Created pod: enrolld-6fbbdd58-qt2ht
+15m         Normal    Started             pod/enrolld-6fbbdd58-qt2ht        Container started
+15m         Warning   Unhealthy           pod/enrolld-6fbbdd58-qt2ht        Readiness probe failed: Get "http://10.42.0.73:8081/readyz": dial tcp 10.42.0.73:8081: connect: connection refused
+15m         Normal    Created             pod/enrolld-6fbbdd58-qt2ht        Container created
+15m         Normal    Pulled              pod/enrolld-6fbbdd58-qt2ht        Container image "docker.io/library/lab3-enrolld:manual-v1" already present on machine and can be accessed by the pod
+15m         Normal    Scheduled           pod/enrolld-6fbbdd58-qt2ht        Successfully assigned lab3-o4/enrolld-6fbbdd58-qt2ht to ecs-course-01
+15m         Normal    ScalingReplicaSet   deployment/enrolld                Scaled up replica set enrolld-6fbbdd58 from 2 to 3
+15m         Normal    SuccessfulRescale   horizontalpodautoscaler/enrolld   New size: 3; reason: cpu resource utilization (percentage of request) above target
+15m         Warning   Unhealthy           pod/enrolld-6fbbdd58-qt2ht        Readiness probe failed: HTTP probe failed with statuscode: 503
+10m         Normal    Scheduled           pod/enrolld-6fbbdd58-bh8lt        Successfully assigned lab3-o4/enrolld-6fbbdd58-bh8lt to ecs-course-01
+10m         Normal    SuccessfulCreate    replicaset/enrolld-6fbbdd58       Created pod: enrolld-6fbbdd58-bh8lt
+10m         Normal    ScalingReplicaSet   deployment/enrolld                Scaled up replica set enrolld-6fbbdd58 from 3 to 4
+10m         Normal    SuccessfulRescale   horizontalpodautoscaler/enrolld   New size: 4; reason: cpu resource utilization (percentage of request) above target
+10m         Warning   Unhealthy           pod/enrolld-6fbbdd58-bh8lt        Readiness probe failed: Get "http://10.42.0.74:8081/readyz": dial tcp 10.42.0.74:8081: connect: connection refused
+10m         Normal    Started             pod/enrolld-6fbbdd58-bh8lt        Container started
+10m         Normal    Created             pod/enrolld-6fbbdd58-bh8lt        Container created
+5m11s       Warning   Unhealthy           pod/enrolld-6fbbdd58-bh8lt        Readiness probe failed: HTTP probe failed with statuscode: 503
+10m         Normal    Pulled              pod/enrolld-6fbbdd58-bh8lt        Container image "docker.io/library/lab3-enrolld:manual-v1" already present on machine and can be accessed by the pod
+5m11s       Normal    Killing             pod/enrolld-6fbbdd58-bh8lt        Stopping container enrolld
+5m11s       Normal    SuccessfulDelete    replicaset/enrolld-6fbbdd58       Deleted pod: enrolld-6fbbdd58-bh8lt
+5m11s       Normal    SuccessfulRescale   horizontalpodautoscaler/enrolld   New size: 3; reason: All metrics below target
+5m11s       Normal    ScalingReplicaSet   deployment/enrolld                Scaled down replica set enrolld-6fbbdd58 from 4 to 3
+4m56s       Normal    Killing             pod/enrolld-6fbbdd58-mz4mw        Stopping container enrolld
+4m56s       Normal    SuccessfulDelete    replicaset/enrolld-6fbbdd58       Deleted pod: enrolld-6fbbdd58-mz4mw
+4m56s       Normal    SuccessfulRescale   horizontalpodautoscaler/enrolld   New size: 2; reason: All metrics below target
+4m56s       Normal    ScalingReplicaSet   deployment/enrolld                Scaled down replica set enrolld-6fbbdd58 from 3 to 2

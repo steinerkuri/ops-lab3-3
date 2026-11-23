@@ -1,0 +1,12 @@
+lab3-inst-8101
+Result=success
+NRestarts=6
+ActiveState=active
+lab3-inst-8102
+Result=success
+NRestarts=7
+ActiveState=active
+lab3-inst-8103
+Result=success
+NRestarts=6
+ActiveState=active

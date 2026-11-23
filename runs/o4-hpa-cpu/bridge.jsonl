@@ -1,0 +1,6 @@
+{"unix": 1795452245.1388097, "action": "added", "addr": "10.42.0.72:8081", "pod": "enrolld-6fbbdd58-mz4mw"}
+{"unix": 1795452245.139339, "action": "added", "addr": "10.42.0.71:8081", "pod": "enrolld-6fbbdd58-xdwrh"}
+{"unix": 1795454641.221226, "action": "added", "addr": "10.42.0.73:8081", "pod": "enrolld-6fbbdd58-qt2ht"}
+{"unix": 1795454941.241961, "action": "added", "addr": "10.42.0.74:8081", "pod": "enrolld-6fbbdd58-bh8lt"}
+{"unix": 1795455257.24972, "action": "removed", "addr": "10.42.0.74:8081"}
+{"unix": 1795455271.2464547, "action": "removed", "addr": "10.42.0.72:8081"}

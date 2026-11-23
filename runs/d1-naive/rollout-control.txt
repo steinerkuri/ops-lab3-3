@@ -1,0 +1,6 @@
+2026-11-23T18:56:49+08:00
+trigger_unix_ms=1795431409648
+run_start=1795431379 mode=naive version=v2
+开始滚动发布
+
+仅表示已受理；完成时间请查看 scaler 日志与 instances.csv。

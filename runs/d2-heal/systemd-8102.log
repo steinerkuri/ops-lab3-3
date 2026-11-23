@@ -1,0 +1,47 @@
+Nov 23 22:08:50 ecs-course-01 systemd[1]: lab3-inst-8102.service: A process of this unit has been killed by the OOM killer.
+Nov 23 22:08:50 ecs-course-01 systemd[1]: lab3-inst-8102.service: Main process exited, code=killed, status=9/KILL
+Nov 23 22:08:50 ecs-course-01 systemd[1]: lab3-inst-8102.service: Failed with result 'oom-kill'.
+Nov 23 22:08:50 ecs-course-01 systemd[1]: lab3-inst-8102.service: Consumed 7.339s CPU time, 63.6M memory peak, 0B memory swap peak.
+Nov 23 22:08:52 ecs-course-01 systemd[1]: lab3-inst-8102.service: Scheduled restart job, restart counter is at 1.
+Nov 23 22:08:52 ecs-course-01 systemd[1]: Started lab3-inst-8102.service - /home/cmm/lab3/bin/enrolld -addr 127.0.0.1:8102 -data /home/cmm/lab3/data/inst-8102 -version v1 -warmup 10s -work 1000000 -leak-kb 16.
+Nov 23 22:08:52 ecs-course-01 enrolld[4163922]: 2026/11/23 22:08:52 enrolld v1 监听 127.0.0.1:8102；GOMAXPROCS=1；cgroup /sys/fs/cgroup/system.slice/lab3-inst-8102.service；预热 10s；读：work=1000000、pool=32、db-ms=2；写：sync=each
+Nov 23 22:10:08 ecs-course-01 systemd[1]: lab3-inst-8102.service: A process of this unit has been killed by the OOM killer.
+Nov 23 22:10:08 ecs-course-01 systemd[1]: lab3-inst-8102.service: Main process exited, code=killed, status=9/KILL
+Nov 23 22:10:08 ecs-course-01 systemd[1]: lab3-inst-8102.service: Failed with result 'oom-kill'.
+Nov 23 22:10:08 ecs-course-01 systemd[1]: lab3-inst-8102.service: Consumed 7.374s CPU time, 63.5M memory peak, 0B memory swap peak.
+Nov 23 22:10:10 ecs-course-01 systemd[1]: lab3-inst-8102.service: Scheduled restart job, restart counter is at 2.
+Nov 23 22:10:10 ecs-course-01 systemd[1]: Started lab3-inst-8102.service - /home/cmm/lab3/bin/enrolld -addr 127.0.0.1:8102 -data /home/cmm/lab3/data/inst-8102 -version v1 -warmup 10s -work 1000000 -leak-kb 16.
+Nov 23 22:10:10 ecs-course-01 enrolld[4164545]: 2026/11/23 22:10:10 enrolld v1 监听 127.0.0.1:8102；GOMAXPROCS=1；cgroup /sys/fs/cgroup/system.slice/lab3-inst-8102.service；预热 10s；读：work=1000000、pool=32、db-ms=2；写：sync=each
+Nov 23 22:11:23 ecs-course-01 systemd[1]: lab3-inst-8102.service: Main process exited, code=killed, status=9/KILL
+Nov 23 22:11:23 ecs-course-01 systemd[1]: lab3-inst-8102.service: Failed with result 'signal'.
+Nov 23 22:11:23 ecs-course-01 systemd[1]: lab3-inst-8102.service: Consumed 7.085s CPU time, 63.7M memory peak, 0B memory swap peak.
+Nov 23 22:11:25 ecs-course-01 systemd[1]: lab3-inst-8102.service: Scheduled restart job, restart counter is at 3.
+Nov 23 22:11:25 ecs-course-01 systemd[1]: Started lab3-inst-8102.service - /home/cmm/lab3/bin/enrolld -addr 127.0.0.1:8102 -data /home/cmm/lab3/data/inst-8102 -version v1 -warmup 10s -work 1000000 -leak-kb 16.
+Nov 23 22:11:25 ecs-course-01 enrolld[4165093]: 2026/11/23 22:11:25 enrolld v1 监听 127.0.0.1:8102；GOMAXPROCS=1；cgroup /sys/fs/cgroup/system.slice/lab3-inst-8102.service；预热 10s；读：work=1000000、pool=32、db-ms=2；写：sync=each
+Nov 23 22:12:31 ecs-course-01 systemd[1]: lab3-inst-8102.service: A process of this unit has been killed by the OOM killer.
+Nov 23 22:12:31 ecs-course-01 systemd[1]: lab3-inst-8102.service: Main process exited, code=killed, status=9/KILL
+Nov 23 22:12:31 ecs-course-01 systemd[1]: lab3-inst-8102.service: Failed with result 'oom-kill'.
+Nov 23 22:12:31 ecs-course-01 systemd[1]: lab3-inst-8102.service: Consumed 6.841s CPU time, 63.8M memory peak, 0B memory swap peak.
+Nov 23 22:12:33 ecs-course-01 systemd[1]: lab3-inst-8102.service: Scheduled restart job, restart counter is at 4.
+Nov 23 22:12:33 ecs-course-01 systemd[1]: Started lab3-inst-8102.service - /home/cmm/lab3/bin/enrolld -addr 127.0.0.1:8102 -data /home/cmm/lab3/data/inst-8102 -version v1 -warmup 10s -work 1000000 -leak-kb 16.
+Nov 23 22:12:33 ecs-course-01 enrolld[4165657]: 2026/11/23 22:12:33 enrolld v1 监听 127.0.0.1:8102；GOMAXPROCS=1；cgroup /sys/fs/cgroup/system.slice/lab3-inst-8102.service；预热 10s；读：work=1000000、pool=32、db-ms=2；写：sync=each
+Nov 23 22:13:33 ecs-course-01 systemd[1]: lab3-inst-8102.service: A process of this unit has been killed by the OOM killer.
+Nov 23 22:13:33 ecs-course-01 systemd[1]: lab3-inst-8102.service: Main process exited, code=killed, status=9/KILL
+Nov 23 22:13:33 ecs-course-01 systemd[1]: lab3-inst-8102.service: Failed with result 'oom-kill'.
+Nov 23 22:13:33 ecs-course-01 systemd[1]: lab3-inst-8102.service: Consumed 6.754s CPU time, 63.2M memory peak, 0B memory swap peak.
+Nov 23 22:13:35 ecs-course-01 systemd[1]: lab3-inst-8102.service: Scheduled restart job, restart counter is at 5.
+Nov 23 22:13:35 ecs-course-01 systemd[1]: Started lab3-inst-8102.service - /home/cmm/lab3/bin/enrolld -addr 127.0.0.1:8102 -data /home/cmm/lab3/data/inst-8102 -version v1 -warmup 10s -work 1000000 -leak-kb 16.
+Nov 23 22:13:35 ecs-course-01 enrolld[4166121]: 2026/11/23 22:13:35 enrolld v1 监听 127.0.0.1:8102；GOMAXPROCS=1；cgroup /sys/fs/cgroup/system.slice/lab3-inst-8102.service；预热 10s；读：work=1000000、pool=32、db-ms=2；写：sync=each
+Nov 23 22:14:39 ecs-course-01 systemd[1]: lab3-inst-8102.service: Main process exited, code=killed, status=9/KILL
+Nov 23 22:14:39 ecs-course-01 systemd[1]: lab3-inst-8102.service: Failed with result 'signal'.
+Nov 23 22:14:39 ecs-course-01 systemd[1]: lab3-inst-8102.service: Consumed 6.962s CPU time, 63.7M memory peak, 0B memory swap peak.
+Nov 23 22:14:41 ecs-course-01 systemd[1]: lab3-inst-8102.service: Scheduled restart job, restart counter is at 6.
+Nov 23 22:14:41 ecs-course-01 systemd[1]: Started lab3-inst-8102.service - /home/cmm/lab3/bin/enrolld -addr 127.0.0.1:8102 -data /home/cmm/lab3/data/inst-8102 -version v1 -warmup 10s -work 1000000 -leak-kb 16.
+Nov 23 22:14:41 ecs-course-01 enrolld[4166695]: 2026/11/23 22:14:41 enrolld v1 监听 127.0.0.1:8102；GOMAXPROCS=1；cgroup /sys/fs/cgroup/system.slice/lab3-inst-8102.service；预热 10s；读：work=1000000、pool=32、db-ms=2；写：sync=each
+Nov 23 22:15:44 ecs-course-01 systemd[1]: lab3-inst-8102.service: A process of this unit has been killed by the OOM killer.
+Nov 23 22:15:44 ecs-course-01 systemd[1]: lab3-inst-8102.service: Main process exited, code=killed, status=9/KILL
+Nov 23 22:15:44 ecs-course-01 systemd[1]: lab3-inst-8102.service: Failed with result 'oom-kill'.
+Nov 23 22:15:44 ecs-course-01 systemd[1]: lab3-inst-8102.service: Consumed 7.089s CPU time, 63.8M memory peak, 0B memory swap peak.
+Nov 23 22:15:46 ecs-course-01 systemd[1]: lab3-inst-8102.service: Scheduled restart job, restart counter is at 7.
+Nov 23 22:15:46 ecs-course-01 systemd[1]: Started lab3-inst-8102.service - /home/cmm/lab3/bin/enrolld -addr 127.0.0.1:8102 -data /home/cmm/lab3/data/inst-8102 -version v1 -warmup 10s -work 1000000 -leak-kb 16.
+Nov 23 22:15:46 ecs-course-01 enrolld[4167184]: 2026/11/23 22:15:46 enrolld v1 监听 127.0.0.1:8102；GOMAXPROCS=1；cgroup /sys/fs/cgroup/system.slice/lab3-inst-8102.service；预热 10s；读：work=1000000、pool=32、db-ms=2；写：sync=each

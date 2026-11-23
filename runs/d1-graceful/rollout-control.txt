@@ -1,0 +1,6 @@
+2026-11-23T19:20:18+08:00
+trigger_unix_ms=1795432818258
+run_start=1795432788 mode=graceful version=v3
+开始滚动发布
+
+仅表示已受理；完成时间请查看 scaler 日志与 instances.csv。

@@ -1,0 +1,62 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"autoscaling/v2","kind":"HorizontalPodAutoscaler","metadata":{"annotations":{},"labels":{"app":"enrolld"},"name":"enrolld","namespace":"lab3-o4"},"spec":{"maxReplicas":4,"metrics":[{"resource":{"name":"cpu","target":{"averageUtilization":70,"type":"Utilization"}},"type":"Resource"}],"minReplicas":2,"scaleTargetRef":{"apiVersion":"apps/v1","kind":"Deployment","name":"enrolld"}}}
+  creationTimestamp: "2026-11-23T16:45:59Z"
+  generation: 1
+  labels:
+    app: enrolld
+  name: enrolld
+  namespace: lab3-o4
+  resourceVersion: "4145"
+  uid: 7412282f-7336-4361-b9d1-f4ee9ce328f4
+spec:
+  maxReplicas: 4
+  metrics:
+  - resource:
+      name: cpu
+      target:
+        averageUtilization: 70
+        type: Utilization
+    type: Resource
+  minReplicas: 2
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: enrolld
+status:
+  conditions:
+  - lastTransitionTime: "2026-11-23T16:45:59Z"
+    message: recommended size matches current size
+    reason: ReadyForNewScale
+    status: "True"
+    type: AbleToScale
+  - lastTransitionTime: "2026-11-23T16:45:59Z"
+    message: the HPA was able to successfully calculate a replica count from cpu resource
+      utilization (percentage of request)
+    reason: ValidMetricFound
+    status: "True"
+    type: ScalingActive
+  - lastTransitionTime: "2026-11-23T17:34:45Z"
+    message: the desired replica count is less than the minimum replica count
+    reason: TooFewReplicas
+    status: "True"
+    type: ScalingLimited
+  - lastTransitionTime: "2026-11-23T17:24:00Z"
+    message: the HPA controller did not scale the workload to zero
+    reason: NotScaledToZero
+    status: "False"
+    type: ScaledToZero
+  currentMetrics:
+  - resource:
+      current:
+        averageUtilization: 0
+        averageValue: 1m
+      name: cpu
+    type: Resource
+  currentReplicas: 2
+  desiredReplicas: 2
+  lastScaleTime: "2026-11-23T17:34:30Z"
+  observedGeneration: 1

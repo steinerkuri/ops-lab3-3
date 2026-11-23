@@ -1,0 +1,40 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: lab3-prometheus-adapter
+  namespace: kube-system
+spec:
+  repo: https://prometheus-community.github.io/helm-charts
+  chart: prometheus-adapter
+  version: "5.4.2"
+  targetNamespace: lab3-o4
+  timeout: 600s
+  valuesContent: |-
+    fullnameOverride: lab3-prometheus-adapter
+    replicas: 1
+    hostNetwork:
+      enabled: true
+    dnsPolicy: ClusterFirstWithHostNet
+    listenPort: 16443
+    prometheus:
+      url: http://127.0.0.1
+      port: 9090
+    metricsRelistInterval: 30s
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
+    rules:
+      default: false
+      custom: []
+      external:
+        - seriesQuery: 'lb_requests_total{job="lbd",backend!="none"}'
+          resources:
+            namespaced: false
+          name:
+            matches: '^lb_requests_total$'
+            as: lab3_arrival_rps
+          metricsQuery: 'sum(rate(lb_requests_total{job="lbd",backend!="none"}[15s]))'

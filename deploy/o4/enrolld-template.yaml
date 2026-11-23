@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lab3-o4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enrolld
+  namespace: lab3-o4
+  labels:
+    app: enrolld
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: enrolld
+  template:
+    metadata:
+      labels:
+        app: enrolld
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: enrolld
+          image: docker.io/library/lab3-enrolld:manual-v1
+          imagePullPolicy: Never
+          env:
+            - name: LAB3_INSTANCE_CPU
+              value: "__INSTANCE_CPU__"
+          args:
+            - -addr
+            - 0.0.0.0:8081
+            - -data
+            - /data
+            - -warmup
+            - 60s
+            - -work
+            - "1000000"
+            - -version
+            - k8s-v1
+          ports:
+            - name: http
+              containerPort: 8081
+          resources:
+            requests:
+              cpu: 250m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: http
+            periodSeconds: 1
+            timeoutSeconds: 1
+            successThreshold: 2
+            failureThreshold: 3
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: enrolld
+  namespace: lab3-o4
+spec:
+  selector:
+    app: enrolld
+  ports:
+    - name: http
+      port: 8081
+      targetPort: http
+  type: ClusterIP

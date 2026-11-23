@@ -1,0 +1,1 @@
+sum(changes(process_start_time_seconds{job="instances"}[10m]))
