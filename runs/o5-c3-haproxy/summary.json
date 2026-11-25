@@ -1,0 +1,62 @@
+{
+  "run": "o5-c3-haproxy",
+  "overall": {
+    "step": "all",
+    "target_rps": "",
+    "start_unix": "1795575912",
+    "end_unix": "1795576152",
+    "start_local": "11:05:12",
+    "sent": "40501",
+    "ok": "40501",
+    "http_err": "0",
+    "timeout": "0",
+    "net_err": "0",
+    "dropped": "0",
+    "ok_rps": "168.8",
+    "error_rate": "0.0000",
+    "mean_ms": "6.29",
+    "p50_ms": "5.28",
+    "p90_ms": "8.83",
+    "p99_ms": "16.44",
+    "max_ms": "98.17",
+    "slo_good": "1.0000",
+    "lag_p99_ms": "1.06",
+    "gen_cpu_pct": "3",
+    "codes": "",
+    "warn": ""
+  },
+  "gap_seconds": 0,
+  "slow": 0,
+  "sample_errors": 0,
+  "max_sample_interval_s": 0.20531654357910156,
+  "transitions": [],
+  "detections": [
+    {
+      "action": "slow",
+      "target": "8102",
+      "injected_s": 59.9998095035553,
+      "detected_after_s": null,
+      "up_after_s": null
+    }
+  ],
+  "phases": {
+    "before": {
+      "seconds": 60,
+      "errors": 0,
+      "median_second_p99_ms": 12.89,
+      "max_second_p99_ms": 20.91
+    },
+    "during": {
+      "seconds": 120,
+      "errors": 0,
+      "median_second_p99_ms": 14.98,
+      "max_second_p99_ms": 72.78
+    },
+    "after": {
+      "seconds": 60,
+      "errors": 0,
+      "median_second_p99_ms": 12.49,
+      "max_second_p99_ms": 18.6
+    }
+  }
+}

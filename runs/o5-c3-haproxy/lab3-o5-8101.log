@@ -1,0 +1,8 @@
+Nov 25 11:04:06 ecs-course-01 systemd[358641]: lab3-o5-8101.service: Sent signal SIGCONT to main process 574383 (enrolld) on client request.
+Nov 25 11:04:06 ecs-course-01 enrolld[574383]: 2026/11/25 11:04:06 收到停止信号：/readyz 改为 503，2s 后停止接收新请求
+Nov 25 11:04:06 ecs-course-01 systemd[358641]: Stopping lab3-o5-8101.service - /home/zhangjikuan/ops-lab3-3/bin/enrolld -addr 127.0.0.1:8101 -work 1000000 -warmup 60s -data /home/zhangjikuan/ops-lab3-3/data/o5/o5-c3-lbd/8101...
+Nov 25 11:04:08 ecs-course-01 enrolld[574383]: 2026/11/25 11:04:08 已停止
+Nov 25 11:04:08 ecs-course-01 systemd[358641]: Stopped lab3-o5-8101.service - /home/zhangjikuan/ops-lab3-3/bin/enrolld -addr 127.0.0.1:8101 -work 1000000 -warmup 60s -data /home/zhangjikuan/ops-lab3-3/data/o5/o5-c3-lbd/8101.
+Nov 25 11:04:08 ecs-course-01 systemd[358641]: lab3-o5-8101.service: Consumed 28.091s CPU time, 2.9M memory peak, 0B memory swap peak.
+Nov 25 11:04:08 ecs-course-01 systemd[358641]: Started lab3-o5-8101.service - /home/zhangjikuan/ops-lab3-3/bin/enrolld -addr 127.0.0.1:8101 -work 1000000 -warmup 60s -data /home/zhangjikuan/ops-lab3-3/data/o5/o5-c3-haproxy/8101.
+Nov 25 11:04:08 ecs-course-01 enrolld[575414]: 2026/11/25 11:04:08 enrolld v1 监听 127.0.0.1:8101；GOMAXPROCS=1；cgroup /sys/fs/cgroup/user.slice/user-1003.slice/user@1003.service/app.slice/lab3-o5-8101.service；预热 1m0s；读：work=1000000、pool=32、db-ms=2；写：sync=each

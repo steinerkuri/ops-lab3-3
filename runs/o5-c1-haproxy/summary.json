@@ -1,0 +1,90 @@
+{
+  "run": "o5-c1-haproxy",
+  "overall": {
+    "step": "all",
+    "target_rps": "",
+    "start_unix": "1795575301",
+    "end_unix": "1795575541",
+    "start_local": "10:55:01",
+    "sent": "40501",
+    "ok": "40119",
+    "http_err": "189",
+    "timeout": "193",
+    "net_err": "0",
+    "dropped": "0",
+    "ok_rps": "167.2",
+    "error_rate": "0.0094",
+    "mean_ms": "6.09",
+    "p50_ms": "5.28",
+    "p90_ms": "8.62",
+    "p99_ms": "13.61",
+    "max_ms": "46.99",
+    "slo_good": "0.9906",
+    "lag_p99_ms": "1.06",
+    "gen_cpu_pct": "4",
+    "codes": "503:131 504:58",
+    "warn": ""
+  },
+  "gap_seconds": 8,
+  "slow": 0,
+  "sample_errors": 0,
+  "max_sample_interval_s": 0.21956539154052734,
+  "transitions": [
+    {
+      "elapsed": 62.600109577178955,
+      "port": "8102",
+      "up": false
+    },
+    {
+      "elapsed": 141.60009837150574,
+      "port": "8102",
+      "up": true
+    },
+    {
+      "elapsed": 164.60009360313416,
+      "port": "8103",
+      "up": false
+    },
+    {
+      "elapsed": 183.0000982284546,
+      "port": "8103",
+      "up": true
+    }
+  ],
+  "detections": [
+    {
+      "action": "kill",
+      "target": "8102",
+      "injected_s": 59.99978184700012,
+      "detected_after_s": 2.600327730178833,
+      "up_after_s": 81.60031652450562
+    },
+    {
+      "action": "pause",
+      "target": "8103",
+      "injected_s": 159.99978184700012,
+      "detected_after_s": 4.600311756134033,
+      "up_after_s": 23.000316381454468
+    }
+  ],
+  "phases": {
+    "before": {
+      "seconds": 60,
+      "errors": 0,
+      "median_second_p99_ms": 13.0,
+      "max_second_p99_ms": 20.0
+    },
+    "during": {
+      "seconds": 120,
+      "errors": 382,
+      "median_second_p99_ms": 12.530000000000001,
+      "max_second_p99_ms": 43.5
+    },
+    "after": {
+      "seconds": 60,
+      "errors": 0,
+      "median_second_p99_ms": 12.39,
+      "max_second_p99_ms": 19.9
+    }
+  }
+}

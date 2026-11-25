@@ -1,0 +1,15 @@
+ControlGroup=/user.slice/user-1003.slice/user@1003.service/app.slice/lab3-o5-8101.service
+CPUQuotaPerSecUSec=250ms
+MemoryMax=134217728
+MemorySwapMax=0
+CPUAffinity=2
+ControlGroup=/user.slice/user-1003.slice/user@1003.service/app.slice/lab3-o5-8102.service
+CPUQuotaPerSecUSec=250ms
+MemoryMax=134217728
+MemorySwapMax=0
+CPUAffinity=2
+ControlGroup=/user.slice/user-1003.slice/user@1003.service/app.slice/lab3-o5-8103.service
+CPUQuotaPerSecUSec=250ms
+MemoryMax=134217728
+MemorySwapMax=0
+CPUAffinity=2

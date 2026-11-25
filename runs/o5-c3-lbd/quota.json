@@ -1,0 +1,7 @@
+{
+  "U_cores": 0.11696172139241041,
+  "window_start": 30.0001013930887,
+  "window_end": 55.00011819507927,
+  "formula": "round(U / 0.85 * 100)",
+  "quota_percent": 14
+}

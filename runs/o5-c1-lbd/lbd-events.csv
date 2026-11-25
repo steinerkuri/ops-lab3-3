@@ -1,0 +1,8 @@
+unix_ms,time,backend,event,detail
+1795574992685,10:49:52.685,127.0.0.1:8101,added,init=up
+1795574992685,10:49:52.685,127.0.0.1:8102,added,init=up
+1795574992685,10:49:52.685,127.0.0.1:8103,added,init=up
+1795575058685,10:50:58.685,127.0.0.1:8102,down,"连续失败 3 次：Get ""http://127.0.0.1:8102/readyz"": dial tcp 127.0.0.1:8102: connect: connection refused"
+1795575137686,10:52:17.686,127.0.0.1:8102,up,连续成功 2 次
+1795575159187,10:52:39.187,127.0.0.1:8103,down,"连续失败 3 次：Get ""http://127.0.0.1:8103/readyz"": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+1795575178687,10:52:58.687,127.0.0.1:8103,up,连续成功 2 次

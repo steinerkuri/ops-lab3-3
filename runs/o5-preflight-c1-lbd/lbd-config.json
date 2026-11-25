@@ -1,0 +1,21 @@
+{
+  "addr": "127.0.0.1:8080",
+  "admin": "127.0.0.1:8090",
+  "policy": "rr",
+  "check_path": "/readyz",
+  "check_interval": "1s",
+  "check_timeout": "500ms",
+  "fall": 3,
+  "rise": 2,
+  "timeout": "2s",
+  "outlier": false,
+  "outlier_window": "10s",
+  "outlier_factor": 3,
+  "outlier_min_ms": 50,
+  "outlier_min_requests": 50,
+  "outlier_error_rate": 0.2,
+  "outlier_max_frac": 0.34,
+  "outlier_eject": "30s",
+  "events": "/home/zhangjikuan/ops-lab3-3/runs/o5-c1-lbd/lbd-events.csv",
+  "started": "2026-11-25T10:46:53+08:00"
+}

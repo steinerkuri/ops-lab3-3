@@ -1,0 +1,4 @@
+2026/11/25 10:46:53 127.0.0.1:8101 added init=up
+2026/11/25 10:46:53 127.0.0.1:8102 added init=up
+2026/11/25 10:46:53 127.0.0.1:8103 added init=up
+2026/11/25 10:46:53 lbd 监听 127.0.0.1:8080（管理接口 127.0.0.1:8090）；rr；健康检查 /readyz 每 1s，超时 500ms，fall 3、rise 2；被动摘除 false；事件写入 /home/zhangjikuan/ops-lab3-3/runs/o5-c1-lbd/lbd-events.csv

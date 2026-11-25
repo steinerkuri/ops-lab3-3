@@ -1,0 +1,17 @@
+{
+  "8101": {
+    "cpu.max": "25000 100000\n",
+    "memory.max": "134217728\n",
+    "memory.swap.max": "0\n"
+  },
+  "8102": {
+    "cpu.max": "25000 100000\n",
+    "memory.max": "134217728\n",
+    "memory.swap.max": "0\n"
+  },
+  "8103": {
+    "cpu.max": "25000 100000\n",
+    "memory.max": "134217728\n",
+    "memory.swap.max": "0\n"
+  }
+}

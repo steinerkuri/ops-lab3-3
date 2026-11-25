@@ -1,0 +1,1 @@
+loadgen：GET http://127.0.0.1:8080/api/courses/1，1 个阶段共 4m0s，到达过程 poisson，超时 2s，GOMAXPROCS=2

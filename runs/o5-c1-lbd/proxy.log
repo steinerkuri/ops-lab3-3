@@ -1,0 +1,8 @@
+2026/11/25 10:49:52 127.0.0.1:8101 added init=up
+2026/11/25 10:49:52 127.0.0.1:8102 added init=up
+2026/11/25 10:49:52 127.0.0.1:8103 added init=up
+2026/11/25 10:49:52 lbd 监听 127.0.0.1:8080（管理接口 127.0.0.1:8090）；rr；健康检查 /readyz 每 1s，超时 500ms，fall 3、rise 2；被动摘除 false；事件写入 /home/zhangjikuan/ops-lab3-3/runs/o5-c1-lbd/lbd-events.csv
+2026/11/25 10:50:58 127.0.0.1:8102 down 连续失败 3 次：Get "http://127.0.0.1:8102/readyz": dial tcp 127.0.0.1:8102: connect: connection refused
+2026/11/25 10:52:17 127.0.0.1:8102 up 连续成功 2 次
+2026/11/25 10:52:39 127.0.0.1:8103 down 连续失败 3 次：Get "http://127.0.0.1:8103/readyz": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+2026/11/25 10:52:58 127.0.0.1:8103 up 连续成功 2 次
